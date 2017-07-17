@@ -29,12 +29,12 @@ export default {
   text-align: center;
   .leader{
     display: flex;
-    height: 80px;
-    line-height: 80px;
+    height: 40px;
+    line-height: 40px;
     border-bottom: 1px solid rgba(7,17,27,0.8);
     span{
       flex:1;
-      font-size: 28px;
+      font-size: 14px;
       a{
         color: #4d555d;
         &:hover{
