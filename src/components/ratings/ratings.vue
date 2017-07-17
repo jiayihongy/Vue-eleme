@@ -1,12 +1,12 @@
 <template>
-  <div class="elme-seller">
-    <h1>我是卖家</h1>
+  <div class="elme-ratings">
+    <h1>我是评价页</h1>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'seller',
+    name: 'ratings',
     data () {
       return {
 
