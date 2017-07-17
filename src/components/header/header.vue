@@ -16,7 +16,7 @@
               <span>{{seller.description}}/{{seller.deliveryTime}}分钟后送达</span>
             </div>
             <div class="manjian" v-if="seller.supports">
-              <i></i>
+              <i :class="tipLog[seller.supports[0].type]"></i>
               <span>{{seller.supports[0].description}}</span>
             </div>
             <div class="baba">
@@ -26,7 +26,8 @@
         </div>
     </div>
     <div class="notice">
-
+      <i></i>
+      <span>{{seller.bulletin}}</span>
     </div>
   </div>
 </template>
@@ -37,10 +38,12 @@
     name: 'header',
     data () {
       return {
-          seller:{}
+          seller:{},
+          tipLog:[]
       }
     },
     created() {
+      //获取卖家数据
       axios.get('/api/seller')
     .then(res=>{
       this.seller = res.data.data;
@@ -49,6 +52,8 @@
     .catch(err=>{
       alert('狗屁不通!')
     });
+    //初始化小图标类名
+    this.tipLog = ['jian','zhe','te','piao','bao']
     }
   }
 </script>
@@ -56,6 +61,22 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "../../commen/css/all.scss";
+//定义小图标数组
+.jian{
+  @include bg-img(decrease_2);
+}
+.zhe{
+  @include bg-img(discount_2);
+}
+.bao{
+  @include bg-img(guarantee_2);
+}
+.piao{
+  @include bg-img(invoice_2);
+}
+.te{
+  @include bg-img(special_2);
+}
   .elme-header {
     height: 134px;
     overflow: hidden;
@@ -125,11 +146,16 @@
             display: inline-block;
             width: 12px;
             height: 12px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            vertical-align: middle;
           }
           span{
             display: inline-block;
             font-size: 10px;
             line-height: 10px;
+            padding-left: 4px;
+            vertical-align: middle;
           }
         }
       }
