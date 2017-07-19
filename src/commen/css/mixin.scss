@@ -4,3 +4,15 @@
     background-image: url($url+"@3x.png")
   }
 }
+//清除浮动
+.cleanfix{
+  display: inline-block;
+  &:after{
+    content: '';
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+  }
+}

@@ -17,7 +17,7 @@
           <span>{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div class="right-count">
+      <div class="right-count" @click="popOut = true">
         <span>{{seller.supports.length}}个</span>
         <span class="iconfont icon-xiangyoujiantou"></span>
       </div>
@@ -27,6 +27,32 @@
       <span>{{seller.bulletin}}</span>
       <span class="iconfont icon-xiangyoujiantou"></span>
     </div>
+    <div class="background">
+      <img :src="seller.avatar">
+    </div>
+    <transition name="fade">
+      <div class="pop-out" v-show="popOut" @click="popOut = !popOut">
+        <div class="pop-wrap clearfix">
+          <div class="pop-main">
+            <div class="pop-top">
+              <span>{{seller.name}}</span>
+              <div class="starts">
+
+              </div>
+            </div>
+            <div class="pop-middle">
+
+            </div>
+            <div class="pop-bottom">
+
+            </div>
+          </div>
+        </div>
+        <div class="pop-footer">
+          <span class="iconfont icon-cuowu"></span>
+        </div>
+      </div>
+   </transition>
   </div>
 </template>
 
@@ -37,7 +63,8 @@
     data () {
       return {
           seller:{},
-          tipLog:[]
+          tipLog:[],
+          popOut:false
       }
     },
     created() {
@@ -79,6 +106,7 @@
   background-color: rgba(7, 17, 27, .5);
   font-size: 10px;
   color:#fff;
+  position: relative;
   .main{
     display: flex;
     padding: 24px 12px 18px 24px;
@@ -161,23 +189,89 @@
     }
   }
   .notice{
+    position: relative;
     height: 28px;
     line-height: 28px;
-    padding: 0 12px;
+    padding: 0 22px 0 12px;
     background-color: rgba(7, 17, 27, .2);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     span:first-child{
-      float: left;
+      display: inline-block;
       width: 22px;
       height: 12px;
       @include bg-img(bulletin);
       background-size: cover;
       margin-top: 7px;
+      vertical-align: top;
     }
     span:nth-child(2){
-      padding-left: 4px;
+      padding: 0 4px;
+      vertical-align: top;
+    }
+    span:last-child{
+      position: absolute;
+      top: 8;
+      right: 12px;
+      font-size: 10px;
+    }
+  }
+  .background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    z-index: -1;
+    filter: blur(10px);
+    img{
+      width: 100%;
+    }
+  }
+  .pop-out{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(7, 17, 27, .8);
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    &.fade-enter{
+      opacity: 0;
+      transform: scaleX(0.1) scaleY(0.1);
+    }
+    &.fade-leave{
+      opacity: 1;
+      transform: scaleX(1) scaleY(1);
+    }
+    &.fade-enter-active{
+      transition: all .5s;
+    }
+    &.fade-leave-active{
+      transform: scaleX(0.1) scaleY(0.1);
+      opacity: 0;
+      transition: all .5s;
+    }
+    .pop-wrap{
+      width: 100%;
+      min-height: 100%;
+      .pop-main{
+        height: 100%;
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+    }
+    .pop-footer{
+      width: 32px;
+      height: 32px;
+      margin: -64px auto 0 auto;
+      clear: both;
+      &>.iconfont{
+        font-size: 32px;
+      }
     }
   }
 }
