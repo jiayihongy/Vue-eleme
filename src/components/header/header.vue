@@ -1,33 +1,31 @@
 <template>
   <div class="elme-header">
-    <div class="header-shadom">
-      <img :src="seller.avatar">
-    </div>
-    <div class="header-main">
-        <div class="brand-img">
-          <img :src="seller.avatar" alt="">
+    <div class="main">
+      <div class="brand-img">
+        <img :src="seller.avatar">
+      </div>
+      <div class="brand-details">
+        <div class="title">
+          <span></span>
+          <span>{{seller.name}}</span>
         </div>
-        <div class="brand-details">
-            <div class="brand-title">
-              <i></i>
-              <span>{{seller.name}}</span>
-            </div>
-            <div class="brand-description">
-              <span>{{seller.description}}/{{seller.deliveryTime}}分钟后送达</span>
-            </div>
-            <div class="manjian" v-if="seller.supports">
-              <i :class="tipLog[seller.supports[0].type]"></i>
-              <span>{{seller.supports[0].description}}</span>
-            </div>
-            <div class="baba">
-              <span>5</span>
-              <span>&gt;</span>
-            </div>
+        <div class="description">
+          <span>{{seller.description}}/{{seller.deliveryTime}}分钟后送达</span>
         </div>
+        <div class="manjian">
+          <span :class="tipLog[seller.supports[0].type]"></span>
+          <span>{{seller.supports[0].description}}</span>
+        </div>
+      </div>
+      <div class="right-count">
+        <span>{{seller.supports.length}}个</span>
+        <span class="iconfont icon-xiangyoujiantou"></span>
+      </div>
     </div>
     <div class="notice">
-      <i></i>
+      <span></span>
       <span>{{seller.bulletin}}</span>
+      <span class="iconfont icon-xiangyoujiantou"></span>
     </div>
   </div>
 </template>
@@ -77,97 +75,110 @@
 .te{
   @include bg-img(special_2);
 }
-  .elme-header {
-    height: 134px;
-    overflow: hidden;
-    background-color: #7e8c8d;
+.elme-header {
+  background-color: rgba(7, 17, 27, .5);
+  font-size: 10px;
+  color:#fff;
+  .main{
+    display: flex;
+    padding: 24px 12px 18px 24px;
+    align-items: center;
     position: relative;
-    text-align: left;
-    .header-shadom{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+    .brand-img{
       img{
-        width: 100%;
+        width: 64px;
+        height: 64px;
+        border-radius: 4px;
       }
     }
-    .header-main {
-      height: 106px;
-      width: 100%;
-      background-color:rgba(7,17,27,0.8);
-      padding: 24px 12px 18px 24px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      color: #fff;
-      .brand-img{
-        float: left;
-        img{
-          height: 64px;
-          width: 64px;
-          border-radius: 5px;
+    .brand-details{
+      margin-left: 16px;
+      .title{
+        font-size: 0;
+        margin-top: 4px;
+        span:first-child{
+          display: inline-block;
+          width: 30px;
+          height: 18px;
+          @include bg-img(brand);
+          background-size: cover;
+          background-repeat: no-repeat;
+          vertical-align: middle;
+        }
+        span:last-child{
+          font:bold 16px/18px "微软雅黑";
+          vertical-align: middle;
+          padding-left: 6px;
         }
       }
-      .brand-details{
-        float: left;
-        padding-left: 12px;
-        .brand-title{
-          font-size: 0;
-          i{
-            display: inline-block;
-            width: 30px;
-            height: 18px;
-            @include bg-img(brand);
-            background-size: cover;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-          }
-          span{
-            font: bold 16px/18px "微软雅黑";
-            vertical-align: middle;
-            padding-left: 6px;
-          }
+      .description{
+        margin-top: 8px;
+        span{
+          font-weight:200;
+          font-size: 12px;
+          line-height: 12px;
         }
-        .brand-description{
-          font-size: 0;
-          padding-top: 8px;
-          padding-bottom: 10px;
-          span{
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 200;
-            line-height: 12px;
-          }
+      }
+      .manjian{
+        margin-top: 10px;
+        margin-bottom: 4px;
+        font-size: 0;
+        span:first-child{
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          vertical-align: middle;
         }
-        .manjian{
-          font-size: 0;
-          i{
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-          }
-          span{
-            display: inline-block;
-            font-size: 10px;
-            line-height: 10px;
-            padding-left: 4px;
-            vertical-align: middle;
-          }
+        span:last-child{
+          padding-left: 4px;
+          font-size: 10px;
+          font-weight: 200;
+          line-height: 12px;
+          vertical-align: middle;
         }
       }
     }
-    .notice{
-      height: 28px;
-      width: 100%;
-      background-color: rgba(7,17,27,0.2);
+    .right-count{
       position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 10;
+      right: 12px;
+      bottom:16px;
+      padding: 7px 8px;
+      background-color: rgba(0, 0, 0, .2);
+      border-radius: 30px;
+      font-size: 0;
+      span:first-child{
+        font-size: 10px;
+        font-weight: 200;
+        line-height: 12px;
+      }
+      span.iconfont{
+        font-size: 6px;
+        font-weight: bold;
+        padding-left: 4px;
+      }
     }
   }
+  .notice{
+    height: 28px;
+    line-height: 28px;
+    padding: 0 12px;
+    background-color: rgba(7, 17, 27, .2);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    span:first-child{
+      float: left;
+      width: 22px;
+      height: 12px;
+      @include bg-img(bulletin);
+      background-size: cover;
+      margin-top: 7px;
+    }
+    span:nth-child(2){
+      padding-left: 4px;
+    }
+  }
+}
 </style>

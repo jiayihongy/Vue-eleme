@@ -26,12 +26,12 @@ export default {
 <style lang="scss">
   @import "commen/css/all";
 #app {
-  text-align: center;
   .leader{
     display: flex;
     height: 40px;
     line-height: 40px;
-    border-bottom: 1px solid rgba(7,17,27,0.8);
+    text-align: center;
+    @include border-1px(rgba(7,17,27,0.2));
     span{
       flex:1;
       font-size: 14px;
