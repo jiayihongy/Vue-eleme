@@ -36,9 +36,7 @@
           <div class="pop-main">
             <div class="pop-top">
               <span>{{seller.name}}</span>
-              <div class="starts">
-
-              </div>
+              <xingxing></xingxing>
             </div>
             <div class="pop-middle">
 
@@ -58,6 +56,7 @@
 
 <script>
   import axios from 'axios'
+  import xingxing from '@/components/xingxing/xingxing'
   export default {
     name: 'header',
     data () {
@@ -79,7 +78,8 @@
     });
     //初始化小图标类名
     this.tipLog = ['jian','zhe','te','piao','bao']
-    }
+  },
+  components:{xingxing}
   }
 </script>
 
@@ -241,17 +241,14 @@
     backdrop-filter: blur(10px);
     &.fade-enter{
       opacity: 0;
-      transform: scaleX(0.1) scaleY(0.1);
     }
     &.fade-leave{
       opacity: 1;
-      transform: scaleX(1) scaleY(1);
     }
     &.fade-enter-active{
       transition: all .5s;
     }
     &.fade-leave-active{
-      transform: scaleX(0.1) scaleY(0.1);
       opacity: 0;
       transition: all .5s;
     }
@@ -262,15 +259,27 @@
         height: 100%;
         padding-top: 64px;
         padding-bottom: 64px;
+        .pop-top{
+          text-align: center;
+          span:first-child{
+            font-size: 16px;
+            line-height: 16px;
+            font-weight: 700;
+          }
+          .stars{
+
+          }
+        }
       }
     }
     .pop-footer{
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       margin: -64px auto 0 auto;
       clear: both;
       &>.iconfont{
-        font-size: 32px;
+        font-size: 24px;
+        font-weight: bold;
       }
     }
   }
