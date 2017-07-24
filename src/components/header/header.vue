@@ -31,22 +31,37 @@
       <img :src="seller.avatar">
     </div>
     <transition name="fade">
-      <div class="pop-out" v-show="popOut" @click="popOut = !popOut">
+      <div class="pop-out" v-show="popOut">
         <div class="pop-wrap clearfix">
           <div class="pop-main">
             <div class="pop-top">
               <span>{{seller.name}}</span>
-              <xingxing></xingxing>
+              <div class="stars">
+                <xingxing :size="48" :score="seller.score"></xingxing>
+              </div>
             </div>
-            <div class="pop-middle">
-
+            <div class="line-title">
+              <span class="line"></span>
+              <span class="big-title">优惠信息</span>
+              <span class="line"></span>
+            </div>
+            <ul class="pop-middle" v-if="seller.supports">
+              <li v-for="(val,index) in seller.supports">
+                <span :class="tipLog[seller.supports[index].type]"></span>
+                <span>{{seller.supports[index].description}}</span>
+              </li>
+            </ul>
+            <div class="line-title">
+              <span class="line"></span>
+              <span class="big-title">商家公告</span>
+              <span class="line"></span>
             </div>
             <div class="pop-bottom">
-
+              <p>{{seller.bulletin}}</p>
             </div>
           </div>
         </div>
-        <div class="pop-footer">
+        <div class="pop-footer" @click="popOut = !popOut">
           <span class="iconfont icon-cuowu"></span>
         </div>
       </div>
@@ -71,7 +86,6 @@
       axios.get('/api/seller')
     .then(res=>{
       this.seller = res.data.data;
-      console.log(res.data.data);
     })
     .catch(err=>{
       alert('狗屁不通!')
@@ -238,6 +252,7 @@
     height: 100%;
     background-color: rgba(7, 17, 27, .8);
     z-index: 10;
+    overflow: auto;
     backdrop-filter: blur(10px);
     &.fade-enter{
       opacity: 0;
@@ -257,8 +272,7 @@
       min-height: 100%;
       .pop-main{
         height: 100%;
-        padding-top: 64px;
-        padding-bottom: 64px;
+        padding:64px 36px 32px 36px;
         .pop-top{
           text-align: center;
           span:first-child{
@@ -267,7 +281,20 @@
             font-weight: 700;
           }
           .stars{
-
+            margin-top: 16px;
+            margin-bottom: 28px;
+          }
+        }
+        .line-title{
+          font-size: 0;
+          .line{
+            display: inline-block;
+            width: 112px;
+            @include border-1px(#fff);
+          }
+          .big-title{
+            font-size: 14px;
+            font-weight: bold;
           }
         }
       }
@@ -275,7 +302,7 @@
     .pop-footer{
       width: 24px;
       height: 24px;
-      margin: -64px auto 0 auto;
+      margin: -32px auto 0 auto;
       clear: both;
       &>.iconfont{
         font-size: 24px;
