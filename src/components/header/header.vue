@@ -41,9 +41,9 @@
               </div>
             </div>
             <div class="line-title">
-              <span class="line"></span>
+              <span class="line border-1px"></span>
               <span class="big-title">优惠信息</span>
-              <span class="line"></span>
+              <span class="line border-1px"></span>
             </div>
             <ul class="pop-middle" v-if="seller.supports">
               <li v-for="(val,index) in seller.supports">
@@ -52,9 +52,9 @@
               </li>
             </ul>
             <div class="line-title">
-              <span class="line"></span>
+              <span class="line border-1px"></span>
               <span class="big-title">商家公告</span>
-              <span class="line"></span>
+              <span class="line border-1px"></span>
             </div>
             <div class="pop-bottom">
               <p>{{seller.bulletin}}</p>
@@ -287,14 +287,49 @@
         }
         .line-title{
           font-size: 0;
+          display: flex;
+          position: relative;
           .line{
-            display: inline-block;
-            width: 112px;
-            @include border-1px(#fff);
+            flex: 1;
+            height: 7px;
+            @include border-1px(rgba(255,255,255,.2));
           }
           .big-title{
             font-size: 14px;
             font-weight: bold;
+            margin: 0 12px;
+          }
+        }
+        .pop-middle{
+          padding: 24px 12px 28px 12px;
+          font-size: 0;
+          li{
+            margin-bottom: 12px;
+            span:first-child{
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              background-size: cover;
+              background-repeat: no-repeat;
+              vertical-align: middle;
+            }
+            span:last-child{
+              display: inline-block;
+              line-height: 100%;
+              vertical-align: middle;
+              font-size: 12px;
+              margin-left: 6px;
+            }
+          }
+          li:last-child{
+            margin-bottom: 0;
+          }
+        }
+        .pop-bottom{
+          padding: 24px 12px;
+          p{
+            font-size: 12px;
+            line-height: 200%;
           }
         }
       }

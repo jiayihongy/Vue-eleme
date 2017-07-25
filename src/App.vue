@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <elmeHeader></elmeHeader>
-    <section class="leader border">
+    <section class="leader border-1px">
       <span><router-link to="/goods">商品</router-link></span>
       <span><router-link to="/ratings">评价</router-link></span>
       <span><router-link to="/seller">商家</router-link></span>
